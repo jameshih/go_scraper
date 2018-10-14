@@ -10,8 +10,9 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func scrape(tp string) {
+func scrape(tp string) string {
 	// Request the HTML page.
+	var obj string
 	res, err := http.Get("https://flipboard.com/topic/" + tp)
 	if err != nil {
 		log.Fatal(err)
@@ -33,10 +34,12 @@ func scrape(tp string) {
 			is "application/ld+json" because json data is in here
 		*/
 		if x, _ := s.Attr("type"); x == "application/ld+json" {
-			fmt.Printf(s.Text()) // get
+			obj = s.Text() // get
 		}
 
 	})
+
+	return obj
 
 }
 
@@ -54,5 +57,5 @@ func scanner() string {
 func main() {
 	s := scanner()
 	fmt.Println("Searching...")
-	scrape(s)
+	fmt.Println(scrape(s))
 }
