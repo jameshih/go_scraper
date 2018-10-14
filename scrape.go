@@ -26,7 +26,10 @@ func ExampleScrape() {
 	}
 
 	doc.Find("script").Each(func(i int, s *goquery.Selection) {
-		// For each item found, get the band and title
+		/*
+			Loop through script tag and find "type" attribute that
+			is "application/ld+json" because json data is in here
+		*/
 		if x, _ := s.Attr("type"); x == "application/ld+json" {
 			fmt.Printf(s.Text()) // get
 		}
