@@ -53,6 +53,6 @@ func scanner() string {
 
 func main() {
 	s := scanner()
-	fmt.Println("Searchhing...")
+	fmt.Println("Searching...")
 	scrape(s)
 }
