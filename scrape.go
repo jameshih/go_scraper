@@ -46,7 +46,7 @@ func scanner() string {
 	fmt.Print("Enter a topic: ")
 	for scanner.Scan() {
 		value = string(scanner.Text())
-		return value
+		break
 	}
 	return value
 }
