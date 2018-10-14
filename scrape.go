@@ -59,3 +59,5 @@ func main() {
 	fmt.Println("Searching...")
 	fmt.Println(scrape(s))
 }
+
+//Todo convert string into json in struct
