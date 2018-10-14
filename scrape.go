@@ -1,16 +1,18 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-func ExampleScrape() {
+func scrape(tp string) {
 	// Request the HTML page.
-	res, err := http.Get("https://flipboard.com/topic/cryptocurrency")
+	res, err := http.Get("https://flipboard.com/topic/" + tp)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,6 +40,19 @@ func ExampleScrape() {
 
 }
 
+func scanner() string {
+	var value string
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Print("Enter a topic: ")
+	for scanner.Scan() {
+		value = string(scanner.Text())
+		return value
+	}
+	return value
+}
+
 func main() {
-	ExampleScrape()
+	s := scanner()
+	fmt.Println("Searchhing...")
+	scrape(s)
 }
