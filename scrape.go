@@ -6,14 +6,21 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-func scrape(tp string) string {
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	log.Printf("%s took %s", name, elapsed)
+}
+
+func scrape(url string) string {
+	defer timeTrack(time.Now(), "factorial - scrape")
 	// Request the HTML page.
 	var obj string
-	res, err := http.Get("https://flipboard.com/topic/" + tp)
+	res, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -44,6 +51,7 @@ func scrape(tp string) string {
 }
 
 func scanner() string {
+	defer timeTrack(time.Now(), "factorial - scanner")
 	var value string
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Print("Enter a topic: ")
@@ -51,7 +59,7 @@ func scanner() string {
 		value = string(scanner.Text())
 		break
 	}
-	return value
+	return "https://flipboard.com/topic/" + value
 }
 
 func main() {
