@@ -60,4 +60,9 @@ func main() {
 	fmt.Println(scrape(s))
 }
 
-//Todo convert string into json in struct
+/*
+TODO:
+ - convert string into json in struct
+ - run a subroutine to access news url
+from proxy urls obtain from json
+*/
